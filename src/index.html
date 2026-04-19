@@ -4,171 +4,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
     <title>Lebenslauf Noa Gasche</title>
 </head>
 
+<style>
+    /* 
+
+    
+
+
+    table {
+        width: 100%;
+    }
+
+    td {
+        vertical-align: top;
+    }
+
+    .firstCol {
+        width: 30%;
+    }
+
+
+    .content {
+        display: grid;
+        grid-template-columns: 20% 1fr;
+    }
+
+    .mainContent {
+        display: grid;
+        grid-template-rows: 100% 100%;
+    } */
+
+    :root {
+        --gray: #D6D6D6;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        background-image: linear-gradient(135deg, #8e8e8e, #575757);
+    }
+
+    body {
+        width: 760px;
+        margin: auto;
+        font-family: Arial;
+        background-color: white;
+    }
+
+    #content {
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "aside header"
+            "aside main";
+    }
+
+    aside {
+        grid-area: aside;
+        background: var(--gray);
+    }
+
+    #asideContent {
+        padding: 20px;
+    }
+
+    header {
+        grid-area: header;
+        padding: 20px;
+    }
+
+    main {
+        grid-area: main;
+        background: #ffffff;
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 32px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    h3 {
+        text-decoration: underline;
+        margin-bottom: 16px;
+        font-size: 18px;
+    }
+
+    .subTitle {
+        background-color: var(--gray);
+        margin-right: -20px;
+        padding: 8px;
+        text-transform: uppercase;
+    }
+
+    #profilbild:hover {
+        width: 100%;
+        z-index: 100;
+        position: relative;
+    }
+
+</style>
+
 <body>
 
-    <h3>Persönliche Daten</h3>
-    <hr>
+    <div id="content">
 
-    <table>
-        <tr>
-            <td>
-                Name
-            </td>
-            <td>
-                Gasche
-            </td>
-            <td rowspan="8">
-                <img src="images/Noa_Portrait.JPG" alt="Profilbild" width="200px" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Vorname
-            </td>
-            <td>
-                Noa
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Adresse
-            </td>
-            <td>
-                Bromeggstrasse 5, 4562 Biberist
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Telefon
-            </td>
-            <td>
-                +41 78 966 40 97
-            </td>
-        </tr>
-        <tr>
-            <td>
-                E-Mail
-            </td>
-            <td>
-                <a href="mailto:noagasche@gmx.ch">noagasche@gmx.ch</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Geburtsdaten
-            </td>
-            <td>
-                17.10.2000, Solothurn
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Nationalität
-            </td>
-            <td>
-                Schweiz
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Zivilstand
-            </td>
-            <td>
-                Ledig
-            </td>
-        </tr>
-    </table>
 
-    <h3>Mein Profil</h3>
-    <hr>
-    <ul>
-        <li>
-            Selbständige und zuverlässige Arbeitsweise
-        </li>
-        <li>
-            Gute Lernfähigkeit
-        </li>
-        <li>
-            Schnelle Auffassungsgabe
-        </li>
-        <li>
-            Teamfähigkeit: Hilfsbereit, kollegial und einsatzfreudig
-        </li>
-        <li>
-            Interessiert und motiviert
-        </li>
-    </ul>
+    <aside>
+        <img id="profilbild" src="images/Noa_Portrait.JPG" alt="Profilbild" width="90%" />
 
-    <h3>IT Kenntnisse</h3>
-    <hr>
-    <table>
-        <tr>
-            <td>
-                MS Office
-            </td>
-            <td>
-                sehr gute Kenntnisse
-            </td>
-        </tr>
-        <tr>
-            <td>
-                HTML/CSS
-            </td>
-            <td>
-                sehr gute Kenntnisse
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Java/JavaScript
-            </td>
-            <td>
-                sehr gute Kenntnisse
-            </td>
-        </tr>
-        <tr>
-            <td>
-                SQL
-            </td>
-            <td>
-                sehr gute Kenntnisse
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Swift
-            </td>
-            <td>
-                gute Kenntnisse
-            </td>
-        </tr>
-        <tr>
-            <td>
-                VB.NET/VBA
-            </td>
-            <td>
-                gute Kenntnisse
-            </td>
-        </tr>
-        <tr>
-            <td>
-                PHP
-            </td>
-            <td>
-                gute Kenntnisse
-            </td>
-        </tr>
-    </table>
+        <div id="asideContent">
 
-    <h3>Berufserfahrung / Ausbildung</h3>
-    <hr>
+            <h3>Persönliches</h3>
 
-    <table>
+            <b>Geburtsdaten</b>
+            17.10.2000, Solothurn
+
+            <b>Zivilstand</b>
+            Ledig
+
+            <b>Nationalität</b>
+            Schweiz
+
+            <h3>Mein Profil</h3>
+            <ul>
+                <li>
+                    Selbständige und zuverlässige Arbeitsweise
+                </li>
+                <li>
+                    Gute Lernfähigkeit
+                </li>
+                <li>
+                    Schnelle Auffassungsgabe
+                </li>
+                <li>
+                    Teamfähigkeit: Hilfsbereit, kollegial und einsatzfreudig
+                </li>
+                <li>
+                    Interessiert und motiviert
+                </li>
+            </ul>
+
+
+            <h3>Sprachen</h3>
+            <hr>
+            <table>
+                <tr>
+                    <td class="firstCol">
+                        Deutsch
+                    </td>
+                    <td>
+                        Muttersprache
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Englisch
+                    </td>
+                    <td>
+                        Niveau C1
+                    </td>
+                </tr>
+            </table>
+
+
+            <h3>Kontakt</h3>
+            Bromeggstrasse 5
+            4562 Biberist
+            +41 78 966 40 97
+            <a href="mailto:noagasche@gmx.ch">noagasche@gmx.ch</a>
+        </div>
+    </aside>
+
+    <header>
+        <h1>Noa</h1>
+        <h1 style="color: #858585;">Gasche</h1>
+        <br>
+        <div class="subTitle">
+            Software Entwickler
+        <div>
+    </header>
+
+    <main>
+
+        <h3>IT Kenntnisse</h3>
+        <hr>
+        <table>
+            <tr>
+                <td class="firstCol">
+                    MS Office
+                </td>
+                <td>
+                    sehr gute Kenntnisse
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    HTML/CSS
+                </td>
+                <td>
+                    sehr gute Kenntnisse
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Java/JavaScript
+                </td>
+                <td>
+                    sehr gute Kenntnisse
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    SQL
+                </td>
+                <td>
+                    sehr gute Kenntnisse
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Swift
+                </td>
+                <td>
+                    gute Kenntnisse
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    VB.NET/VBA
+                </td>
+                <td>
+                    gute Kenntnisse
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    PHP
+                </td>
+                <td>
+                    gute Kenntnisse
+                </td>
+            </tr>
+        </table>
+
+
+        <h3>Berufserfahrung / Ausbildung</h3>
+        <table>
         <tr>
-            <td>
+            <td class="firstCol">
                 seit 11/2021
             </td>
             <td>
@@ -257,30 +352,13 @@
         </tr>
     </table>
 
-    <h3>Sprachen</h3>
-    <hr>
-    <table>
-        <tr>
-            <td>
-                Deutsch
-            </td>
-            <td>
-                Muttersprache
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Englisch
-            </td>
-            <td>
-                sehr gute Kenntnisse, schriftlich und mündlich
-            </td>
-        </tr>
-    </table>
-
     <h3>Referenzen</h3>
     <hr>
     gerne auf Anfrage
+
+    </main>
+
+    </div>
 
 
 </body>
