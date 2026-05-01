@@ -1,366 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css">
-    <title>Lebenslauf Noa Gasche</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Login</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		:root {
+			--text: #e2e8f0;
+		}
+
+		html,
+		body {
+			min-height: 100%;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			display: grid;
+			place-items: center;
+			padding: 16px;
+			font-family: Arial, Helvetica, sans-serif;
+			color: var(--text);
+			background:
+				linear-gradient(160deg, #020617, #0f172a 55%, #111827);
+		}
+
+		#main {
+			width: min(100%, 460px);
+			padding: 14px;
+			border: 1px solid #94a3b833;
+			border-radius: 28px;
+			background: #ffffff17;
+			backdrop-filter: blur(14px);
+			box-shadow: 0 24px 80px #02061773;
+		}
+
+		.login-card {
+			display: grid;
+			gap: 18px;
+			padding: 20px;
+			border-radius: 22px;
+			background: #ffffff0d;
+			border: 1px solid #ffffff12;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: clamp(2rem, 8vw, 3.2rem);
+			line-height: 0.95;
+			text-transform: uppercase;
+		}
+
+		.form {
+			display: grid;
+			gap: 14px;
+		}
+
+		.row {
+			display: grid;
+			gap: 8px;
+		}
+
+		label {
+			font-size: 1rem;
+			color: #e5eef9;
+		}
+
+		input {
+			width: 100%;
+			padding: 14px 16px;
+			border-radius: 14px;
+			border: 1px solid #ffffff1f;
+			background: #02061766;
+			color: var(--text);
+			font-size: 1rem;
+			outline: none;
+		}
+
+		input:focus {
+			border-color: #7dd3fc;
+			box-shadow: 0 0 0 4px #7dd3fc1f;
+		}
+
+		button {
+			padding: 14px 16px;
+			border: 0;
+			border-radius: 14px;
+			font-size: 1rem;
+			font-weight: 700;
+			color: #08111f;
+			background: linear-gradient(90deg, #7dd3fc, #a78bfa);
+			cursor: pointer;
+		}
+
+		button:hover {
+			filter: brightness(1.1);
+		}
+
+		.error {
+			font-size: 1rem;
+			color: #fca5a5;
+		}
+
+		@media (min-width: 735px) {
+			#main {
+				width: min(100%, 500px);
+				padding: 18px;
+			}
+
+			.login-card {
+				padding: 26px;
+				gap: 20px;
+			}
+		}
+	</style>
 </head>
-
-<style>
-    /* 
-
-    
-
-
-    table {
-        width: 100%;
-    }
-
-    td {
-        vertical-align: top;
-    }
-
-    .firstCol {
-        width: 30%;
-    }
-
-
-    .content {
-        display: grid;
-        grid-template-columns: 20% 1fr;
-    }
-
-    .mainContent {
-        display: grid;
-        grid-template-rows: 100% 100%;
-    } */
-
-    :root {
-        --gray: #D6D6D6;
-    }
-
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    html {
-        background-image: linear-gradient(135deg, #8e8e8e, #575757);
-    }
-
-    body {
-        width: 760px;
-        margin: auto;
-        font-family: Arial;
-        background-color: white;
-    }
-
-    #content {
-        font-family: Arial, sans-serif;
-        min-height: 100vh;
-        display: grid;
-        grid-template-columns: 250px 1fr;
-        grid-template-rows: auto 1fr;
-        grid-template-areas:
-            "aside header"
-            "aside main";
-    }
-
-    aside {
-        grid-area: aside;
-        background: var(--gray);
-    }
-
-    #asideContent {
-        padding: 20px;
-    }
-
-    header {
-        grid-area: header;
-        padding: 20px;
-    }
-
-    main {
-        grid-area: main;
-        background: #ffffff;
-        padding: 20px;
-    }
-    
-    h1 {
-        font-size: 32px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-
-    h3 {
-        text-decoration: underline;
-        margin-bottom: 16px;
-        font-size: 18px;
-    }
-
-    .subTitle {
-        background-color: var(--gray);
-        margin-right: -20px;
-        padding: 8px;
-        text-transform: uppercase;
-    }
-
-    #profilbild:hover {
-        width: 100%;
-        z-index: 100;
-        position: relative;
-    }
-
-</style>
-
 <body>
+	<main id="main">
+		<section class="login-card">
+            <h1>Login</h1>
 
-    <div id="content">
+			<form class="form" id="loginForm">
+				<div class="row">
+					<label for="username">Benutzername</label>
+					<input id="username" name="username" type="text" placeholder="Username" />
+				</div>
+				<div class="row">
+					<label for="password">Passwort</label>
+					<input id="password" name="password" type="password" placeholder="Password" />
+				</div>
+				<button type="submit">CV Anschauen</button>
+				<div class="error" id="errorMessage"></div>
+			</form>
+		</section>
+	</main>
 
+	<script>
+		const form = document.getElementById('loginForm');
+		const errorMessage = document.getElementById('errorMessage');
+		const usernameInput = document.getElementById('username');
+		const passwordInput = document.getElementById('password');
 
-    <aside>
-        <img id="profilbild" src="images/Noa_Portrait.JPG" alt="Profilbild" width="90%" />
+		form.addEventListener('submit', function (event) {
+			event.preventDefault();
 
-        <div id="asideContent">
+			const username = usernameInput.value.trim().toLowerCase();
+			const password = passwordInput.value.trim();
 
-            <h3>Persönliches</h3>
+			if (username === 'noa' && password === 'gasche') {
+				window.location.href = 'pages/cv.html';
+				return;
+			}
 
-            <b>Geburtsdaten</b>
-            17.10.2000, Solothurn
-
-            <b>Zivilstand</b>
-            Ledig
-
-            <b>Nationalität</b>
-            Schweiz
-
-            <h3>Mein Profil</h3>
-            <ul>
-                <li>
-                    Selbständige und zuverlässige Arbeitsweise
-                </li>
-                <li>
-                    Gute Lernfähigkeit
-                </li>
-                <li>
-                    Schnelle Auffassungsgabe
-                </li>
-                <li>
-                    Teamfähigkeit: Hilfsbereit, kollegial und einsatzfreudig
-                </li>
-                <li>
-                    Interessiert und motiviert
-                </li>
-            </ul>
-
-
-            <h3>Sprachen</h3>
-            <hr>
-            <table>
-                <tr>
-                    <td class="firstCol">
-                        Deutsch
-                    </td>
-                    <td>
-                        Muttersprache
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Englisch
-                    </td>
-                    <td>
-                        Niveau C1
-                    </td>
-                </tr>
-            </table>
-
-
-            <h3>Kontakt</h3>
-            Bromeggstrasse 5
-            4562 Biberist
-            +41 78 966 40 97
-            <a href="mailto:noagasche@gmx.ch">noagasche@gmx.ch</a>
-        </div>
-    </aside>
-
-    <header>
-        <h1>Noa</h1>
-        <h1 style="color: #858585;">Gasche</h1>
-        <br>
-        <div class="subTitle">
-            Software Entwickler
-        <div>
-    </header>
-
-    <main>
-
-        <h3>IT Kenntnisse</h3>
-        <hr>
-        <table>
-            <tr>
-                <td class="firstCol">
-                    MS Office
-                </td>
-                <td>
-                    sehr gute Kenntnisse
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    HTML/CSS
-                </td>
-                <td>
-                    sehr gute Kenntnisse
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Java/JavaScript
-                </td>
-                <td>
-                    sehr gute Kenntnisse
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    SQL
-                </td>
-                <td>
-                    sehr gute Kenntnisse
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Swift
-                </td>
-                <td>
-                    gute Kenntnisse
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    VB.NET/VBA
-                </td>
-                <td>
-                    gute Kenntnisse
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    PHP
-                </td>
-                <td>
-                    gute Kenntnisse
-                </td>
-            </tr>
-        </table>
-
-
-        <h3>Berufserfahrung / Ausbildung</h3>
-        <table>
-        <tr>
-            <td class="firstCol">
-                seit 11/2021
-            </td>
-            <td>
-                <b>Siaxma AG</b><br>
-                Software Entwickler
-                <ul>
-                    <li>
-                        Webentwicklung
-                    </li>
-                    <li>
-                        Entwicklung Java-Dienste
-                    </li>
-                    <li>
-                        Appentwicklung (Android, iOS)
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" />
-        </tr>
-        <tr>
-            <td>
-                08/2020 - 10/2021
-            </td>
-            <td>
-                <b>ETA SA</b><br>
-                Junior SAP BI Developer
-                <ul>
-                    <li>
-                        Entwicklung im Bereich SAP BI
-                    </li>
-                    <li>
-                        4 Monate Unterbruch aufgrund der Absolvierung der Rekrutenschule
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" />
-        </tr>
-        <tr>
-            <td>
-                08/2016 - 08/2020
-            </td>
-            <td>
-                <b>ETA SA</b><br>
-                Ausbildung als Informatiker EFZ Applikationsentwicklung
-                <ul>
-                    <li>
-                        Webentwicklung
-                    </li>
-                    <li>
-                        Anwendungsentwicklung
-                    </li>
-                    <li>
-                        Entwicklung im Bereich SAP
-                    </li>
-                    <li>
-                        Besuch der Berufsschule
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" />
-        </tr>
-        <tr>
-            <td>
-                08/2013 - 08/2016
-            </td>
-            <td>
-                Oberstufe Sek E in Biberist
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" />
-        </tr>
-        <tr>
-            <td>
-                08/2007 - 08/2013
-            </td>
-            <td>
-                Primarschule in Biberist
-            </td>
-        </tr>
-    </table>
-
-    <h3>Referenzen</h3>
-    <hr>
-    gerne auf Anfrage
-
-    </main>
-
-    </div>
-
-
+			errorMessage.textContent = 'Die eingegebenen Anmeldedaten sind ungültig. Bitte versuchen Sie es erneut.';
+			passwordInput.value = '';
+			passwordInput.focus();
+		});
+	</script>
 </body>
-
 </html>

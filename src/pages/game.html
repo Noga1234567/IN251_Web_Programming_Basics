@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Memory Game</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		:root {
+			--text: #e2e8f0;
+		}
+
+		html,
+		body {
+			min-height: 100%;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			display: grid;
+			place-items: center;
+			padding: 16px;
+			font-family: Arial, Helvetica, sans-serif;
+			color: var(--text);
+			background:
+				linear-gradient(160deg, #020617, #0f172a 55%, #111827);
+		}
+
+		#main {
+			width: min(100%, 460px);
+			padding: 14px;
+			border: 1px solid #94a3b833;
+			border-radius: 28px;
+			background: #ffffff17;
+			backdrop-filter: blur(14px);
+			box-shadow: 0 24px 80px #02061773;
+		}
+
+		.login-card {
+			display: grid;
+			gap: 18px;
+			padding: 20px;
+			border-radius: 22px;
+			background: #ffffff0d;
+			border: 1px solid #ffffff12;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: clamp(2rem, 8vw, 3.2rem);
+			line-height: 0.95;
+			text-transform: uppercase;
+			text-align: center;
+		}
+
+		p {
+			text-align: center;
+			line-height: 1.2rem;
+		}
+
+		.gamefield {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 14px;
+		}
+
+		.infofield {
+			display: grid;
+			width: 100%;
+			aspect-ratio: 1 / 1;
+		}
+
+		.infofield > * {
+			grid-area: 1 / 1;
+			width: 100%;
+			height: 100%;
+		}
+
+		.infofield > :not(.gamefield) {
+			display: grid;
+			place-items: center;
+			text-align: center;
+		}
+
+		#messageDiv {
+			display: none;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			padding: 12px;
+			font-size: 2rem;
+		}
+
+		.button {
+			width: 100%;
+			aspect-ratio: 1 / 1;
+			border: 0;
+			border-radius: 14px;
+			cursor: pointer;
+		}
+
+		#btnRed {
+			background: #ef4444;
+		}
+
+		#btnRed:active {
+			background: #ef4444cc;
+		}
+
+		#btnGreen {
+			background: #22c55e;
+		}
+
+		#btnGreen:active {
+			background: #22c55ecc;
+		}
+
+		#btnYellow {
+			background: #f3c333;
+		}
+
+		#btnYellow:active {
+			background: #f3c333cc;
+		}
+
+		#btnBlue {
+			background: #3b82f6;
+		}
+
+		#btnBlue:active {
+			background: #3b82f6cc;
+		}
+
+		.row {
+			display: grid;
+			gap: 8px;
+		}
+
+		label {
+			font-size: 1rem;
+			color: #e5eef9;
+		}
+
+		input {
+			width: 100%;
+			padding: 14px 16px;
+			border-radius: 14px;
+			border: 1px solid #ffffff1f;
+			background: #02061766;
+			color: var(--text);
+			font-size: 1rem;
+			outline: none;
+		}
+
+		input:focus {
+			border-color: #7dd3fc;
+			box-shadow: 0 0 0 4px #7dd3fc1f;
+		}
+
+		button {
+			padding: 14px 16px;
+			border: 0;
+			border-radius: 14px;
+			font-size: 1rem;
+			font-weight: 700;
+			color: #08111f;
+			background: linear-gradient(90deg, #7dd3fc, #a78bfa);
+			cursor: pointer;
+		}
+
+		button:hover {
+			filter: brightness(1.1);
+		}
+
+		.error {
+			font-size: 1rem;
+			color: #fca5a5;
+		}
+
+		@media (min-width: 735px) {
+			#main {
+				width: min(100%, 500px);
+				padding: 18px;
+			}
+
+			.login-card {
+				padding: 26px;
+				gap: 20px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main id="main">
+		<header>
+			<h1>Memory Game</h1>
+			<p>Willkommen zum Memory Game!<br>Hier testen wir Ihr Gedächtnis.</p>
+		</header>
+		<section class="login-card">
+
+			<div class="infofield">
+				<div id="clickToPlay">
+					<p>Klicken Sie hier um das Spiel zu starten!</p>
+				</div>
+				<div id="messageDiv" style="display: none;">
+				</div>
+				<div id="colorDiv" style="display: none;">
+
+				</div>
+				<div class="gamefield" style="display: none;">
+					<button id="btnRed" class="button"></button>
+					<button id="btnGreen" class="button"></button>
+					<button id="btnYellow" class="button"></button>
+					<button id="btnBlue" class="button"></button>
+				</div>
+			</div>
+			
+
+		</section>
+	</main>
+
+	<script>
+		const clickToPlay = document.getElementById('clickToPlay');
+		const messageDiv = document.getElementById('messageDiv');
+
+		let colors = [];
+		const MAX_ROUNDS = 40;
+		const COLOR_MAP = ['#ef4444', '#22c55e', '#f3c333', '#3b82f6'];
+
+		let currentRound = 0;
+		let userInputCount = 0;
+
+		function sleep(ms) {
+			return new Promise(function (resolve) {
+				setTimeout(resolve, ms);
+			});
+		}
+
+		clickToPlay.addEventListener('click', function () {
+			currentRound = 0;
+			colors = [];
+			for (let i = 0; i < MAX_ROUNDS; i++) {
+				const randomColor = Math.floor(Math.random() * 4);
+				colors.push(randomColor);
+			}
+
+			clickToPlay.style.display = 'none';
+			messageDiv.style.display = 'flex';
+			messageDiv.textContent = 'Merken Sie sich die Reihenfolge der angezeigten Farben. In jeder Runde wird eine weitere Farbe hinzugefügt.';
+			setTimeout(function () {
+				let countdown = 3;
+				messageDiv.style.fontSize = '8rem';
+				messageDiv.textContent = countdown;
+				const interval = setInterval(function () {
+					countdown--;
+					if (countdown > 0) {
+						messageDiv.textContent = countdown;
+					} else {
+						clearInterval(interval);
+						messageDiv.style.display = 'none';
+						messageDiv.style.fontSize = '2rem';
+						showColors();
+					}
+				}, 1000);
+			}, 3000);
+		});
+
+		async function showColors() {
+			const colorDiv = document.getElementById('colorDiv');
+			colorDiv.style.display = 'grid';
+			colorDiv.textContent = '';
+				for (let i = 0; i <= currentRound; i++) {
+					colorDiv.style.backgroundColor = COLOR_MAP[colors[i]];
+					await sleep(1000);
+					colorDiv.style.backgroundColor = 'transparent';
+					await sleep(500);
+			}
+			colorDiv.style.display = 'none';
+			document.querySelector('.gamefield').style.display = 'grid';
+			waitForUserInput();
+		}
+
+		const buttons = document.querySelectorAll('.gamefield .button');
+			buttons.forEach(function (button, index) {
+				button.addEventListener('click', function () {
+					if (index === colors[userInputCount]) {
+						userInputCount++;
+						if (userInputCount > currentRound) {
+
+							if (currentRound === MAX_ROUNDS - 1) {
+								messageDiv.style.display = 'flex';
+								messageDiv.textContent = 'Herzlichen Glückwunsch! Sie haben alle ' + MAX_ROUNDS + ' Runden geschafft!';
+								document.querySelector('.gamefield').style.display = 'none';
+								clickToPlay.style.display = 'block';
+								return;
+							}
+
+							currentRound++;
+							messageDiv.style.display = 'flex';
+							messageDiv.textContent = 'Richtig! Die nächste Runde startet.';
+							document.querySelector('.gamefield').style.display = 'none';
+							setTimeout(function () {
+								messageDiv.style.display = 'none';
+								showColors();
+							}, 2000);
+						}
+					} else {
+						messageDiv.style.display = 'flex';
+						messageDiv.textContent = 'Falsch! Das Spiel wird neu gestartet.\nSie haben ' + currentRound + (currentRound === 1 ? ' Runde' : ' Runden') + ' geschafft.';
+						document.querySelector('.gamefield').style.display = 'none';
+						clickToPlay.style.display = 'block';
+						return;
+					}
+				});
+			});
+
+		function waitForUserInput() {
+			userInputCount = 0;
+		}
+	</script>
+</body>
+</html>
