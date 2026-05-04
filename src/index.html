@@ -149,17 +149,16 @@
 		form.addEventListener('submit', function (event) {
 			event.preventDefault();
 
-			const username = usernameInput.value.trim().toLowerCase();
+			const username = usernameInput.value.trim();
 			const password = passwordInput.value.trim();
 
-			if (username === 'noa' && password === 'gasche') {
+			if (username === 'zukuenftigerArbeitsgeber' && password === 'Extr3m$ich3r3$P@ssw0rtFuerD@sCVv0nN0@G@sch3') {
 				window.location.href = 'pages/cv.html';
-				return;
+			} else {
+				errorMessage.textContent = 'Die eingegebenen Anmeldedaten sind ungültig. Bitte versuchen Sie es erneut.';
+				passwordInput.value = '';
+				passwordInput.focus();
 			}
-
-			errorMessage.textContent = 'Die eingegebenen Anmeldedaten sind ungültig. Bitte versuchen Sie es erneut.';
-			passwordInput.value = '';
-			passwordInput.focus();
 		});
 	</script>
 </body>

@@ -22,21 +22,36 @@
 			margin: 0;
 			min-height: 100vh;
 			display: grid;
-			place-items: center;
+			grid-auto-rows: min-content;
+			gap: 1rem;
+			align-content: center;
+			justify-items: center;
 			padding: 16px;
 			font-family: Arial, Helvetica, sans-serif;
 			color: var(--text);
+			font-size: 1.2rem;
 			background:
 				linear-gradient(160deg, #020617, #0f172a 55%, #111827);
 		}
 
-		#main {
+		main {
+			width: 100%;
+			display: grid;
+			place-items: center;
+			min-width: 0;
+		}
+
+		header {
+			text-align: center;
+			margin-top: 16px;
+		}
+
+		article {
 			width: min(100%, 460px);
 			padding: 14px;
 			border: 1px solid #94a3b833;
 			border-radius: 28px;
 			background: #ffffff17;
-			backdrop-filter: blur(14px);
 			box-shadow: 0 24px 80px #02061773;
 		}
 
@@ -62,16 +77,37 @@
 			line-height: 1.2rem;
 		}
 
-		.gamefield {
+		#clickToPlay {
+			display: grid;
+			cursor: pointer;
+		}
+
+		#gamefield {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
 			gap: 14px;
+		}
+
+		#finalDiv {
+			display: none;
+			grid-template-rows: auto auto;
+			gap: 3em;
+			padding: 12px;
+			border-radius: 14px;
+			background: #ffffff0d;
+			border: 1px solid #ffffff12;
+			text-align: center;
+			justify-items: center;
+			align-content: center;
+			align-items: center;
+			width: 100%;
 		}
 
 		.infofield {
 			display: grid;
 			width: 100%;
 			aspect-ratio: 1 / 1;
+			overflow: hidden;
 		}
 
 		.infofield > * {
@@ -80,8 +116,7 @@
 			height: 100%;
 		}
 
-		.infofield > :not(.gamefield) {
-			display: grid;
+		.infofield > :not(#gamefield, #finalDiv) {
 			place-items: center;
 			text-align: center;
 		}
@@ -92,7 +127,20 @@
 			justify-content: center;
 			text-align: center;
 			padding: 12px;
-			font-size: 2rem;
+			width: 100%;
+			max-width: 100%;
+			min-width: 0;
+			overflow-wrap: anywhere;
+			word-break: break-word;
+			white-space: pre-line;
+		}
+
+		#restartDiv {
+			cursor: pointer;
+			display: grid;
+			gap: 8px;
+			align-items: center;
+			grid-template-columns: 20px auto;
 		}
 
 		.button {
@@ -135,54 +183,12 @@
 			background: #3b82f6cc;
 		}
 
-		.row {
-			display: grid;
-			gap: 8px;
-		}
-
-		label {
-			font-size: 1rem;
-			color: #e5eef9;
-		}
-
-		input {
-			width: 100%;
-			padding: 14px 16px;
-			border-radius: 14px;
-			border: 1px solid #ffffff1f;
-			background: #02061766;
+		a {
 			color: var(--text);
-			font-size: 1rem;
-			outline: none;
-		}
-
-		input:focus {
-			border-color: #7dd3fc;
-			box-shadow: 0 0 0 4px #7dd3fc1f;
-		}
-
-		button {
-			padding: 14px 16px;
-			border: 0;
-			border-radius: 14px;
-			font-size: 1rem;
-			font-weight: 700;
-			color: #08111f;
-			background: linear-gradient(90deg, #7dd3fc, #a78bfa);
-			cursor: pointer;
-		}
-
-		button:hover {
-			filter: brightness(1.1);
-		}
-
-		.error {
-			font-size: 1rem;
-			color: #fca5a5;
 		}
 
 		@media (min-width: 735px) {
-			#main {
+			article {
 				width: min(100%, 500px);
 				padding: 18px;
 			}
@@ -195,37 +201,48 @@
 	</style>
 </head>
 <body>
-	<main id="main">
-		<header>
-			<h1>Memory Game</h1>
-			<p>Willkommen zum Memory Game!<br>Hier testen wir Ihr Gedächtnis.</p>
-		</header>
-		<section class="login-card">
-
-			<div class="infofield">
-				<div id="clickToPlay">
-					<p>Klicken Sie hier um das Spiel zu starten!</p>
+	<main>
+		<article>
+			<header>
+				<h1>Memory Game</h1>
+				<p>Willkommen zum Memory Game!<br>Hier können Sie Ihr Gedächtnis testen.</p>
+			</header>
+			<section class="login-card">
+				<div class="infofield">
+					<div id="clickToPlay">
+						<p>Klicken Sie hier um das Spiel zu starten!</p>
+					</div>
+					<div id="messageDiv"></div>
+					<div id="colorDiv" style="display: none;"></div>
+					<div id="finalDiv">
+						<div id="finalTextDiv">
+						</div>
+						<div id="restartDiv">
+							<img src="../images/rotateLeft.svg" alt="Restart Icon" width="20" height="20" />
+							Erneut versuchen
+						</div>
+					</div>
+					<div id="gamefield" style="display: none;">
+						<button id="btnRed" class="button"></button>
+						<button id="btnGreen" class="button"></button>
+						<button id="btnYellow" class="button"></button>
+						<button id="btnBlue" class="button"></button>
+					</div>
 				</div>
-				<div id="messageDiv" style="display: none;">
-				</div>
-				<div id="colorDiv" style="display: none;">
-
-				</div>
-				<div class="gamefield" style="display: none;">
-					<button id="btnRed" class="button"></button>
-					<button id="btnGreen" class="button"></button>
-					<button id="btnYellow" class="button"></button>
-					<button id="btnBlue" class="button"></button>
-				</div>
-			</div>
-			
-
-		</section>
+			</section>
+		</article>
 	</main>
+	<footer>
+		<p><a href="cv.html">Zurück zum Lebenslauf</a></p>
+	</footer>
 
 	<script>
 		const clickToPlay = document.getElementById('clickToPlay');
 		const messageDiv = document.getElementById('messageDiv');
+		const gamefield = document.getElementById('gamefield');
+		const finalDiv = document.getElementById('finalDiv');
+		const finalTextDiv = document.getElementById('finalTextDiv');
+		const restartDiv = document.getElementById('restartDiv');
 
 		let colors = [];
 		const MAX_ROUNDS = 40;
@@ -240,7 +257,8 @@
 			});
 		}
 
-		clickToPlay.addEventListener('click', function () {
+		const playFunction = function () {
+			finalDiv.style.display = 'none';
 			currentRound = 0;
 			colors = [];
 			for (let i = 0; i < MAX_ROUNDS; i++) {
@@ -249,7 +267,7 @@
 			}
 
 			clickToPlay.style.display = 'none';
-			messageDiv.style.display = 'flex';
+			messageDiv.style.display = 'grid';
 			messageDiv.textContent = 'Merken Sie sich die Reihenfolge der angezeigten Farben. In jeder Runde wird eine weitere Farbe hinzugefügt.';
 			setTimeout(function () {
 				let countdown = 3;
@@ -262,65 +280,60 @@
 					} else {
 						clearInterval(interval);
 						messageDiv.style.display = 'none';
-						messageDiv.style.fontSize = '2rem';
+						messageDiv.style.fontSize = '1.2rem';
 						showColors();
 					}
 				}, 1000);
 			}, 3000);
-		});
+		};
+
+		clickToPlay.addEventListener('click', playFunction);
+		restartDiv.addEventListener('click', playFunction);
 
 		async function showColors() {
 			const colorDiv = document.getElementById('colorDiv');
 			colorDiv.style.display = 'grid';
 			colorDiv.textContent = '';
-				for (let i = 0; i <= currentRound; i++) {
-					colorDiv.style.backgroundColor = COLOR_MAP[colors[i]];
-					await sleep(1000);
-					colorDiv.style.backgroundColor = 'transparent';
-					await sleep(500);
+			for (let i = 0; i <= currentRound; i++) {
+				colorDiv.style.backgroundColor = COLOR_MAP[colors[i]];
+				await sleep(1000);
+				colorDiv.style.backgroundColor = 'transparent';
+				await sleep(500);
 			}
 			colorDiv.style.display = 'none';
-			document.querySelector('.gamefield').style.display = 'grid';
-			waitForUserInput();
+			gamefield.style.display = 'grid';
+			userInputCount = 0;
 		}
 
-		const buttons = document.querySelectorAll('.gamefield .button');
+		const buttons = document.querySelectorAll('#gamefield .button');
 			buttons.forEach(function (button, index) {
 				button.addEventListener('click', function () {
 					if (index === colors[userInputCount]) {
 						userInputCount++;
 						if (userInputCount > currentRound) {
-
 							if (currentRound === MAX_ROUNDS - 1) {
-								messageDiv.style.display = 'flex';
-								messageDiv.textContent = 'Herzlichen Glückwunsch! Sie haben alle ' + MAX_ROUNDS + ' Runden geschafft!';
-								document.querySelector('.gamefield').style.display = 'none';
-								clickToPlay.style.display = 'block';
-								return;
+								finalDiv.style.display = 'grid';
+								finalTextDiv.textContent = 'Herzlichen Glückwunsch! Sie haben alle ' + MAX_ROUNDS + ' Runden geschafft!';
+								gamefield.style.display = 'none';
+							} else {
+								currentRound++;
+								messageDiv.style.display = 'grid';
+								messageDiv.textContent = 'Richtig! Die nächste Runde startet.';
+								gamefield.style.display = 'none';
+								setTimeout(function () {
+									messageDiv.style.display = 'none';
+									showColors();
+								}, 2000);
 							}
-
-							currentRound++;
-							messageDiv.style.display = 'flex';
-							messageDiv.textContent = 'Richtig! Die nächste Runde startet.';
-							document.querySelector('.gamefield').style.display = 'none';
-							setTimeout(function () {
-								messageDiv.style.display = 'none';
-								showColors();
-							}, 2000);
 						}
 					} else {
-						messageDiv.style.display = 'flex';
-						messageDiv.textContent = 'Falsch! Das Spiel wird neu gestartet.\nSie haben ' + currentRound + (currentRound === 1 ? ' Runde' : ' Runden') + ' geschafft.';
-						document.querySelector('.gamefield').style.display = 'none';
-						clickToPlay.style.display = 'block';
+						finalDiv.style.display = 'grid';
+						finalTextDiv.textContent = 'Falsch! Das Spiel wird neu gestartet.\nSie haben ' + currentRound + (currentRound === 1 ? ' Runde' : ' Runden') + ' geschafft.';
+						gamefield.style.display = 'none';
 						return;
 					}
 				});
 			});
-
-		function waitForUserInput() {
-			userInputCount = 0;
-		}
 	</script>
 </body>
 </html>
