@@ -13,11 +13,6 @@
 			--text: #e2e8f0;
 		}
 
-		html,
-		body {
-			min-height: 100%;
-		}
-
 		body {
 			margin: 0;
 			min-height: 100vh;
@@ -34,19 +29,12 @@
 				linear-gradient(160deg, #020617, #0f172a 55%, #111827);
 		}
 
-		main {
-			width: 100%;
-			display: grid;
-			place-items: center;
-			min-width: 0;
-		}
-
 		header {
 			text-align: center;
 			margin-top: 16px;
 		}
 
-		article {
+		main {
 			width: min(100%, 460px);
 			padding: 14px;
 			border: 1px solid #94a3b833;
@@ -55,13 +43,14 @@
 			box-shadow: 0 24px 80px #02061773;
 		}
 
-		.login-card {
+		section {
 			display: grid;
 			gap: 18px;
 			padding: 20px;
 			border-radius: 22px;
 			background: #ffffff0d;
 			border: 1px solid #ffffff12;
+			margin-top: 16px;
 		}
 
 		h1 {
@@ -80,6 +69,7 @@
 		#clickToPlay {
 			display: grid;
 			cursor: pointer;
+			align-items: center;
 		}
 
 		#gamefield {
@@ -103,22 +93,16 @@
 			width: 100%;
 		}
 
-		.infofield {
+		#colorDiv {
+			display: none;
+			border-radius: 14px;
+		}
+
+		#infofield {
 			display: grid;
 			width: 100%;
 			aspect-ratio: 1 / 1;
 			overflow: hidden;
-		}
-
-		.infofield > * {
-			grid-area: 1 / 1;
-			width: 100%;
-			height: 100%;
-		}
-
-		.infofield > :not(#gamefield, #finalDiv) {
-			place-items: center;
-			text-align: center;
 		}
 
 		#messageDiv {
@@ -144,8 +128,6 @@
 		}
 
 		.button {
-			width: 100%;
-			aspect-ratio: 1 / 1;
 			border: 0;
 			border-radius: 14px;
 			cursor: pointer;
@@ -188,12 +170,12 @@
 		}
 
 		@media (min-width: 735px) {
-			article {
+			main {
 				width: min(100%, 500px);
 				padding: 18px;
 			}
 
-			.login-card {
+			section {
 				padding: 26px;
 				gap: 20px;
 			}
@@ -202,21 +184,20 @@
 </head>
 <body>
 	<main>
-		<article>
 			<header>
 				<h1>Memory Game</h1>
 				<p>Willkommen zum Memory Game!<br>Hier können Sie Ihr Gedächtnis testen.</p>
+				<div>Highscore: <span id="highscore">0</span></div>
 			</header>
-			<section class="login-card">
-				<div class="infofield">
+			<section>
+				<div id="infofield">
 					<div id="clickToPlay">
 						<p>Klicken Sie hier um das Spiel zu starten!</p>
 					</div>
 					<div id="messageDiv"></div>
-					<div id="colorDiv" style="display: none;"></div>
+					<div id="colorDiv"></div>
 					<div id="finalDiv">
-						<div id="finalTextDiv">
-						</div>
+						<div id="finalTextDiv"></div>
 						<div id="restartDiv">
 							<img src="../images/rotateLeft.svg" alt="Restart Icon" width="20" height="20" />
 							Erneut versuchen
@@ -230,13 +211,23 @@
 					</div>
 				</div>
 			</section>
-		</article>
 	</main>
 	<footer>
-		<p><a href="cv.html">Zurück zum Lebenslauf</a></p>
+		<p><a href="cv.html" onclick="sessionStorage.setItem('fromGame', 'true')">Zurück zum Lebenslauf</a></p>
 	</footer>
 
 	<script>
+		function checkLogin() {
+			const fromCV = sessionStorage.getItem('fromCV');
+			if (!fromCV) {
+				window.location.href = '../index.html';
+				return;
+			}
+			sessionStorage.removeItem('fromCV');
+		}
+		
+		checkLogin();
+		
 		const clickToPlay = document.getElementById('clickToPlay');
 		const messageDiv = document.getElementById('messageDiv');
 		const gamefield = document.getElementById('gamefield');
@@ -244,12 +235,15 @@
 		const finalTextDiv = document.getElementById('finalTextDiv');
 		const restartDiv = document.getElementById('restartDiv');
 
+		const highscoreSpan = document.getElementById('highscore');
+
 		let colors = [];
 		const MAX_ROUNDS = 40;
 		const COLOR_MAP = ['#ef4444', '#22c55e', '#f3c333', '#3b82f6'];
 
 		let currentRound = 0;
 		let userInputCount = 0;
+		let highscore = 0;
 
 		function sleep(ms) {
 			return new Promise(function (resolve) {
@@ -315,6 +309,8 @@
 								finalDiv.style.display = 'grid';
 								finalTextDiv.textContent = 'Herzlichen Glückwunsch! Sie haben alle ' + MAX_ROUNDS + ' Runden geschafft!';
 								gamefield.style.display = 'none';
+								highscore = MAX_ROUNDS;
+								highscoreSpan.textContent = highscore;
 							} else {
 								currentRound++;
 								messageDiv.style.display = 'grid';
@@ -330,6 +326,8 @@
 						finalDiv.style.display = 'grid';
 						finalTextDiv.textContent = 'Falsch! Das Spiel wird neu gestartet.\nSie haben ' + currentRound + (currentRound === 1 ? ' Runde' : ' Runden') + ' geschafft.';
 						gamefield.style.display = 'none';
+						highscore = currentRound > highscore ? currentRound : highscore;
+						highscoreSpan.textContent = highscore;
 						return;
 					}
 				});

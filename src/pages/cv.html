@@ -173,6 +173,7 @@
 		.entries {
 			display: grid;
 			gap: 12px;
+			padding-top: 16px;
 		}
 
 		.skill {
@@ -436,11 +437,23 @@
 		</section>
 	</main>
 	<script>
-		document.querySelector('.image-container').addEventListener('click', function() {
-			// Option 1: Navigate to another page
-			// window.location.href = 'gallery.html';
+		function checkLogin() {
+			const loginSuccess = sessionStorage.getItem('loginSuccess');
+			const fromGame = sessionStorage.getItem('fromGame');
 			
-			// Option 2: Show a popup/modal
+			if (!loginSuccess && !fromGame) {
+				window.location.href = '../index.html';
+				return;
+			}
+			
+			sessionStorage.removeItem('loginSuccess');
+			sessionStorage.removeItem('fromGame');
+		}
+		
+		checkLogin();
+		
+		document.querySelector('.image-container').addEventListener('click', function() {
+			sessionStorage.setItem('fromCV', 'true');
 			window.location.href = 'game.html';
 		});
 	</script>
