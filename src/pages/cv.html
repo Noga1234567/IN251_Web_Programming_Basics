@@ -4,59 +4,13 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Lebenslauf Noa Gasche</title>
+	<link rel="stylesheet" href="../styles/style.css" />
 	<style>
-		* {
-			box-sizing: border-box;
-		}
 
-		body {
-			margin: 0;
-			min-height: 100vh;
-			padding: 12px;
-			font-family: Arial, Helvetica, sans-serif;
-			color: #e2e2e2;
-			background:
-				radial-gradient(circle at top left, #38BDF838, transparent 30%),
-				radial-gradient(circle at top right, #38BDF838, transparent 30%),
-				linear-gradient(160deg, #020617, #0f172a 55%, #111827);
-		}
-
-		#content {
-			width: 100%;
-			margin: 0 auto;
-			display: grid;
-            gap: 16px;
-			grid-template-columns: 1fr;
-			grid-template-areas:
-				"header"
-				"aside"
-				"main";
-		}
-
-		.card {
-			background: #FFFFFF14;
-			border: 1px solid #94A3B833;
-			border-radius: 22px;
-			box-shadow: 0 24px 80px #02061773;
-			overflow: hidden;
-		}
-
-		header {
-			grid-area: header;
-			padding: 24px;
-		}
 
 		h1 {
 			margin: 14px 0px;
 			font-size: clamp(2rem, 8vw, 4rem);
-			text-transform: uppercase;
-		}
-
-		.title {
-			margin: 0;
-			color: #dbeafe;
-			font-size: 1rem;
-			letter-spacing: 0.1em;
 			text-transform: uppercase;
 		}
 
@@ -241,19 +195,6 @@
 		}
 
 		@media (min-width: 735px) {
-			body {
-				padding: 16px;
-			}
-
-			#content {
-				width: min(980px, 100%);
-				grid-template-columns: minmax(320px, 34%) minmax(0, 1fr);
-				grid-template-rows: auto 1fr auto;
-				grid-template-areas:
-					"aside header"
-					"aside main"
-			}
-
 			header,
 			#asideContent,
 			.main-content {
@@ -267,17 +208,6 @@
 	}
 
 	@media (min-width: 1068px) {
-		body {
-			padding: 20px;
-		}
-
-		#content {
-			grid-template-columns: 33% 1fr;
-			grid-template-areas:
-				"aside header"
-				"aside main"
-		}
-
 		header,
 		#asideContent,
 		.main-content {
@@ -287,8 +217,8 @@
 	</style>
 </head>
 <body>
-	<main id="content">
-		<header class="card">
+	<main class="cvMain">
+		<header class="cvHeader card">
 			<h1>Noa Gasche</h1>
 			<p class="title">Software Entwickler</p>
 		</header>

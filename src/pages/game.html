@@ -4,44 +4,9 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Memory Game</title>
+	<link rel="stylesheet" href="../styles/style.css" />
 	<style>
-		* {
-			box-sizing: border-box;
-		}
 
-		:root {
-			--text: #e2e8f0;
-		}
-
-		body {
-			margin: 0;
-			min-height: 100vh;
-			display: grid;
-			grid-auto-rows: min-content;
-			gap: 1rem;
-			align-content: center;
-			justify-items: center;
-			padding: 16px;
-			font-family: Arial, Helvetica, sans-serif;
-			color: var(--text);
-			font-size: 1.2rem;
-			background:
-				linear-gradient(160deg, #020617, #0f172a 55%, #111827);
-		}
-
-		header {
-			text-align: center;
-			margin-top: 16px;
-		}
-
-		main {
-			width: min(100%, 460px);
-			padding: 14px;
-			border: 1px solid #94a3b833;
-			border-radius: 28px;
-			background: #ffffff17;
-			box-shadow: 0 24px 80px #02061773;
-		}
 
 		section {
 			display: grid;
@@ -170,11 +135,6 @@
 		}
 
 		@media (min-width: 735px) {
-			main {
-				width: min(100%, 500px);
-				padding: 18px;
-			}
-
 			section {
 				padding: 26px;
 				gap: 20px;
@@ -183,7 +143,7 @@
 	</style>
 </head>
 <body>
-	<main>
+	<main class="mainCard">
 			<header>
 				<h1>Memory Game</h1>
 				<p>Willkommen zum Memory Game!<br>Hier können Sie Ihr Gedächtnis testen.</p>

@@ -1,0 +1,111 @@
+:root {
+    --text: #e2e8f0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 12px;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, #38BDF838, transparent 30%),
+        radial-gradient(circle at top right, #38BDF838, transparent 30%),
+        linear-gradient(160deg, #020617, #0f172a 55%, #111827);
+}
+
+header {
+    text-align: center;
+    margin-top: 16px;
+}
+
+header.cvHeader {
+    grid-area: header;
+    padding: 24px;
+    text-align: start;
+    margin-top: 0;
+}
+
+main.mainCard {
+    width: min(100%, 460px);
+    padding: 14px;
+    border: 1px solid #94a3b833;
+    border-radius: 28px;
+    background: #ffffff17;
+    box-shadow: 0 24px 80px #02061773;
+}
+
+main.cvMain {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "aside"
+        "main";
+}
+
+
+
+
+
+.card {
+    background: #FFFFFF14;
+    border: 1px solid #94A3B833;
+    border-radius: 22px;
+    box-shadow: 0 24px 80px #02061773;
+    overflow: hidden;
+}
+
+.title {
+    margin: 0;
+    color: #dbeafe;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+
+@media (min-width: 735px) {
+    body {
+        padding: 16px;
+    }
+
+    main.mainCard {
+        width: min(100%, 500px);
+        padding: 18px;
+    }
+
+    main.cvMain {
+        width: min(980px, 100%);
+        grid-template-columns: minmax(320px, 34%) minmax(0, 1fr);
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "aside header"
+            "aside main"
+    }
+}
+
+@media (min-width: 1068px) {
+    body {
+        padding: 20px;
+    }
+
+    main.cvMain {
+        grid-template-columns: 33% 1fr;
+        grid-template-areas:
+            "aside header"
+            "aside main"
+    }
+}
