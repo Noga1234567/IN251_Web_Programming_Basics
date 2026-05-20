@@ -5,84 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Login</title>
 	<link rel="stylesheet" href="styles/style.css" />
-	<style>
-
-		section {
-			display: grid;
-			gap: 18px;
-			padding: 20px;
-			border-radius: 22px;
-			background: #ffffff0d;
-			border: 1px solid #ffffff12;
-			margin-top: 16px;
-		}
-
-		h1 {
-			margin: 0;
-			font-size: clamp(2rem, 8vw, 3.2rem);
-			line-height: 0.95;
-			text-transform: uppercase;
-			text-align: center;
-		}
-
-		.form {
-			display: grid;
-			gap: 14px;
-		}
-
-		.row {
-			display: grid;
-			gap: 8px;
-		}
-
-		label {
-			font-size: 1rem;
-			color: #e5eef9;
-		}
-
-		input {
-			width: 100%;
-			padding: 14px 16px;
-			border-radius: 14px;
-			border: 1px solid #ffffff1f;
-			background: #02061766;
-			color: var(--text);
-			font-size: 1rem;
-			outline: none;
-		}
-
-		input:focus {
-			border-color: #7dd3fc;
-			box-shadow: 0 0 0 4px #7dd3fc1f;
-		}
-
-		button {
-			padding: 14px 16px;
-			border: 0;
-			border-radius: 14px;
-			font-size: 1rem;
-			font-weight: 700;
-			color: #08111f;
-			background: linear-gradient(90deg, #7dd3fc, #a78bfa);
-			cursor: pointer;
-		}
-
-		button:hover {
-			filter: brightness(1.1);
-		}
-
-		.error {
-			font-size: 1rem;
-			color: #fca5a5;
-		}
-
-		@media (min-width: 735px) {
-			section {
-				padding: 26px;
-				gap: 20px;
-			}
-		}
-	</style>
 </head>
 <body>
 	<main class="mainCard">
@@ -91,11 +13,11 @@
 		</header>
 		<section>
 			<form class="form" id="loginForm">
-				<div class="row">
+				<div class="loginRow">
 					<label for="username">Benutzername</label>
 					<input id="username" name="username" type="text" placeholder="Username" />
 				</div>
-				<div class="row">
+				<div class="loginRow">
 					<label for="password">Passwort</label>
 					<input id="password" name="password" type="password" placeholder="Password" />
 				</div>

@@ -1,179 +1,47 @@
 <!doctype html>
 <html lang="de">
+
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Memory Game</title>
 	<link rel="stylesheet" href="../styles/style.css" />
-	<style>
-
-
-		section {
-			display: grid;
-			gap: 18px;
-			padding: 20px;
-			border-radius: 22px;
-			background: #ffffff0d;
-			border: 1px solid #ffffff12;
-			margin-top: 16px;
-		}
-
-		h1 {
-			margin: 0;
-			font-size: clamp(2rem, 8vw, 3.2rem);
-			line-height: 0.95;
-			text-transform: uppercase;
-			text-align: center;
-		}
-
-		p {
-			text-align: center;
-			line-height: 1.2rem;
-		}
-
-		#clickToPlay {
-			display: grid;
-			cursor: pointer;
-			align-items: center;
-		}
-
-		#gamefield {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 14px;
-		}
-
-		#finalDiv {
-			display: none;
-			grid-template-rows: auto auto;
-			gap: 3em;
-			padding: 12px;
-			border-radius: 14px;
-			background: #ffffff0d;
-			border: 1px solid #ffffff12;
-			text-align: center;
-			justify-items: center;
-			align-content: center;
-			align-items: center;
-			width: 100%;
-		}
-
-		#colorDiv {
-			display: none;
-			border-radius: 14px;
-		}
-
-		#infofield {
-			display: grid;
-			width: 100%;
-			aspect-ratio: 1 / 1;
-			overflow: hidden;
-		}
-
-		#messageDiv {
-			display: none;
-			align-items: center;
-			justify-content: center;
-			text-align: center;
-			padding: 12px;
-			width: 100%;
-			max-width: 100%;
-			min-width: 0;
-			overflow-wrap: anywhere;
-			word-break: break-word;
-			white-space: pre-line;
-		}
-
-		#restartDiv {
-			cursor: pointer;
-			display: grid;
-			gap: 8px;
-			align-items: center;
-			grid-template-columns: 20px auto;
-		}
-
-		.button {
-			border: 0;
-			border-radius: 14px;
-			cursor: pointer;
-		}
-
-		#btnRed {
-			background: #ef4444;
-		}
-
-		#btnRed:active {
-			background: #ef4444cc;
-		}
-
-		#btnGreen {
-			background: #22c55e;
-		}
-
-		#btnGreen:active {
-			background: #22c55ecc;
-		}
-
-		#btnYellow {
-			background: #f3c333;
-		}
-
-		#btnYellow:active {
-			background: #f3c333cc;
-		}
-
-		#btnBlue {
-			background: #3b82f6;
-		}
-
-		#btnBlue:active {
-			background: #3b82f6cc;
-		}
-
-		a {
-			color: var(--text);
-		}
-
-		@media (min-width: 735px) {
-			section {
-				padding: 26px;
-				gap: 20px;
-			}
-		}
-	</style>
 </head>
+
 <body>
 	<main class="mainCard">
-			<header>
-				<h1>Memory Game</h1>
-				<p>Willkommen zum Memory Game!<br>Hier können Sie Ihr Gedächtnis testen.</p>
-				<div>Highscore: <span id="highscore">0</span></div>
-			</header>
-			<section>
-				<div id="infofield">
-					<div id="clickToPlay">
-						<p>Klicken Sie hier um das Spiel zu starten!</p>
-					</div>
-					<div id="messageDiv"></div>
-					<div id="colorDiv"></div>
-					<div id="finalDiv">
-						<div id="finalTextDiv"></div>
-						<div id="restartDiv">
-							<img src="../images/rotateLeft.svg" alt="Restart Icon" width="20" height="20" />
-							Erneut versuchen
-						</div>
-					</div>
-					<div id="gamefield" style="display: none;">
-						<button id="btnRed" class="button"></button>
-						<button id="btnGreen" class="button"></button>
-						<button id="btnYellow" class="button"></button>
-						<button id="btnBlue" class="button"></button>
+		<header>
+			<h1>Memory Game</h1>
+			<p class="gameP">Willkommen zum Memory Game!<br>Hier können Sie Ihr Gedächtnis testen.</p>
+			<div>Highscore: <span id="highscore">0</span></div>
+		</header>
+		<section>
+			<div id="infofield">
+				<div id="clickToPlay">
+					<p class="gameP">Klicken Sie hier um das Spiel zu starten!</p>
+				</div>
+				<div id="messageDiv"></div>
+				<div id="colorDiv"></div>
+				<div id="finalDiv">
+					<div id="finalTextDiv"></div>
+					<div id="restartDiv">
+						<img src="../images/rotateLeft.svg" alt="Restart Icon" width="20" height="20" />
+						Erneut versuchen
 					</div>
 				</div>
-			</section>
+				<div id="gamefield" style="display: none;">
+					<button id="btnRed" class="button"></button>
+					<button id="btnGreen" class="button"></button>
+					<button id="btnYellow" class="button"></button>
+					<button id="btnBlue" class="button"></button>
+				</div>
+			</div>
+		</section>
 	</main>
 	<footer>
-		<p><a href="cv.html" onclick="sessionStorage.setItem('fromGame', 'true')">Zurück zum Lebenslauf</a></p>
+		<p class="gameP">
+			<a href="cv.html" onclick="sessionStorage.setItem('fromGame', 'true')">Zurück zum Lebenslauf</a>
+		</p>
 	</footer>
 
 	<script>
@@ -185,9 +53,9 @@
 			}
 			sessionStorage.removeItem('fromCV');
 		}
-		
+
 		checkLogin();
-		
+
 		const clickToPlay = document.getElementById('clickToPlay');
 		const messageDiv = document.getElementById('messageDiv');
 		const gamefield = document.getElementById('gamefield');
@@ -260,38 +128,39 @@
 		}
 
 		const buttons = document.querySelectorAll('#gamefield .button');
-			buttons.forEach(function (button, index) {
-				button.addEventListener('click', function () {
-					if (index === colors[userInputCount]) {
-						userInputCount++;
-						if (userInputCount > currentRound) {
-							if (currentRound === MAX_ROUNDS - 1) {
-								finalDiv.style.display = 'grid';
-								finalTextDiv.textContent = 'Herzlichen Glückwunsch! Sie haben alle ' + MAX_ROUNDS + ' Runden geschafft!';
-								gamefield.style.display = 'none';
-								highscore = MAX_ROUNDS;
-								highscoreSpan.textContent = highscore;
-							} else {
-								currentRound++;
-								messageDiv.style.display = 'grid';
-								messageDiv.textContent = 'Richtig! Die nächste Runde startet.';
-								gamefield.style.display = 'none';
-								setTimeout(function () {
-									messageDiv.style.display = 'none';
-									showColors();
-								}, 2000);
-							}
+		buttons.forEach(function (button, index) {
+			button.addEventListener('click', function () {
+				if (index === colors[userInputCount]) {
+					userInputCount++;
+					if (userInputCount > currentRound) {
+						if (currentRound === MAX_ROUNDS - 1) {
+							finalDiv.style.display = 'grid';
+							finalTextDiv.textContent = 'Herzlichen Glückwunsch! Sie haben alle ' + MAX_ROUNDS + ' Runden geschafft!';
+							gamefield.style.display = 'none';
+							highscore = MAX_ROUNDS;
+							highscoreSpan.textContent = highscore;
+						} else {
+							currentRound++;
+							messageDiv.style.display = 'grid';
+							messageDiv.textContent = 'Richtig! Die nächste Runde startet.';
+							gamefield.style.display = 'none';
+							setTimeout(function () {
+								messageDiv.style.display = 'none';
+								showColors();
+							}, 2000);
 						}
-					} else {
-						finalDiv.style.display = 'grid';
-						finalTextDiv.textContent = 'Falsch! Das Spiel wird neu gestartet.\nSie haben ' + currentRound + (currentRound === 1 ? ' Runde' : ' Runden') + ' geschafft.';
-						gamefield.style.display = 'none';
-						highscore = currentRound > highscore ? currentRound : highscore;
-						highscoreSpan.textContent = highscore;
-						return;
 					}
-				});
+				} else {
+					finalDiv.style.display = 'grid';
+					finalTextDiv.textContent = 'Falsch! Sie haben ' + currentRound + (currentRound === 1 ? ' Runde' : ' Runden') + ' geschafft.';
+					gamefield.style.display = 'none';
+					highscore = currentRound > highscore ? currentRound : highscore;
+					highscoreSpan.textContent = highscore;
+					return;
+				}
 			});
+		});
 	</script>
 </body>
+
 </html>
